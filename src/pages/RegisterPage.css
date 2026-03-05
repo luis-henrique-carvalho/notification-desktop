@@ -1,6 +1,6 @@
-/* ── Login Page ─────────────────────────────────────────── */
+/* ── Register Page ───────────────────────────────────────── */
 
-.login-page {
+.register-page {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,7 +9,7 @@
   padding: 1rem;
 }
 
-.login-card {
+.register-card {
   background: #1e293b;
   border: 1px solid #334155;
   border-radius: 12px;
@@ -21,24 +21,24 @@
 
 /* ── Header ─────────────────────────────────────────────── */
 
-.login-header {
+.register-header {
   text-align: center;
   margin-bottom: 2rem;
 }
 
-.login-logo {
+.register-logo {
   font-size: 3rem;
   margin-bottom: 0.5rem;
 }
 
-.login-header h1 {
+.register-header h1 {
   font-size: 1.5rem;
   font-weight: 700;
   color: #f1f5f9;
   margin: 0 0 0.25rem;
 }
 
-.login-header p {
+.register-header p {
   color: #94a3b8;
   font-size: 0.875rem;
   margin: 0;
@@ -46,20 +46,20 @@
 
 /* ── Alerts ─────────────────────────────────────────────── */
 
-.login-alert {
+.register-alert {
   border-radius: 8px;
   padding: 0.75rem 1rem;
   font-size: 0.875rem;
   margin-bottom: 1.25rem;
 }
 
-.login-alert--warning {
-  background: rgba(245, 158, 11, 0.12);
-  border: 1px solid rgba(245, 158, 11, 0.4);
-  color: #fcd34d;
+.register-alert--success {
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  color: #86efac;
 }
 
-.login-alert--error {
+.register-alert--error {
   background: rgba(239, 68, 68, 0.12);
   border: 1px solid rgba(239, 68, 68, 0.4);
   color: #fca5a5;
@@ -67,7 +67,7 @@
 
 /* ── Form ────────────────────────────────────────────────── */
 
-.login-form {
+.register-form {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
@@ -85,7 +85,8 @@
   color: #cbd5e1;
 }
 
-.form-group input {
+.form-group input,
+.form-group select {
   background: #0f172a;
   border: 1px solid #334155;
   border-radius: 8px;
@@ -100,19 +101,25 @@
   color: #475569;
 }
 
-.form-group input:focus {
+.form-group input:focus,
+.form-group select:focus {
   border-color: #6366f1;
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
 }
 
-.form-group input:disabled {
+.form-group input:disabled,
+.form-group select:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
+.form-group select option {
+  background: #1e293b;
+}
+
 /* ── Submit button ───────────────────────────────────────── */
 
-.login-btn {
+.register-btn {
   width: 100%;
   padding: 0.75rem;
   background: #6366f1;
@@ -126,31 +133,31 @@
   margin-top: 0.25rem;
 }
 
-.login-btn:hover:not(:disabled) {
+.register-btn:hover:not(:disabled) {
   background: #4f46e5;
 }
 
-.login-btn:disabled {
+.register-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
 /* ── Footer link ─────────────────────────────────────────── */
 
-.login-footer {
+.register-footer {
   text-align: center;
   margin-top: 1.5rem;
   font-size: 0.875rem;
   color: #64748b;
 }
 
-.login-footer a {
+.register-footer a {
   color: #818cf8;
   text-decoration: none;
   font-weight: 500;
 }
 
-.login-footer a:hover {
+.register-footer a:hover {
   color: #a5b4fc;
   text-decoration: underline;
 }

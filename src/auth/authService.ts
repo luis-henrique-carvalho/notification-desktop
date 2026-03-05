@@ -88,8 +88,6 @@ export async function login(
     body: { email, password },
   });
 
-  console.log("Login response:", { data, error });
-
   if (error || !data) {
     const errMsg =
       error != null && typeof error === "object" && "message" in error
@@ -98,7 +96,6 @@ export async function login(
     throw new Error(errMsg);
   }
 
-  // The login response shape from the shared DTO: { access_token, user: { id, name, email, role } }
   const response = data as { accessToken: string; user: AuthUser };
 
   console.log("Parsed login response:", response);
@@ -124,4 +121,37 @@ export async function login(
 export function logout(): void {
   clearAuthToken();
   localStorage.removeItem(USER_KEY);
+}
+
+/**
+ * Register a new account.
+ *
+ * Throws an error if:
+ *   - the email is already taken (API error)
+ *   - the server returns an unexpected response
+ */
+export async function register(
+  name: string,
+  email: string,
+  password: string,
+): Promise<AuthUser> {
+  const { data, error } = await api.POST("/auth/register", {
+    body: { name, email, password },
+  });
+
+  if (error || !data) {
+    const errMsg =
+      error != null && typeof error === "object" && "message" in error
+        ? String((error as { message: unknown }).message)
+        : "Registration failed";
+    throw new Error(errMsg);
+  }
+
+  const response = data as { accessToken: string; user: AuthUser };
+
+  if (!response.user) {
+    throw new Error("Unexpected response from server");
+  }
+
+  return response.user;
 }

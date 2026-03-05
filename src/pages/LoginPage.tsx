@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from "react";
+import { Link } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import "./LoginPage.css";
 
@@ -82,6 +83,10 @@ export function LoginPage() {
             {loading ? "Signing in…" : "Sign in"}
           </button>
         </form>
+
+        <div className="login-footer">
+          Don't have an account? <Link to="/register">Create one</Link>
+        </div>
       </div>
     </div>
   );
