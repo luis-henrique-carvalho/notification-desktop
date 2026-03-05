@@ -76,9 +76,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const login = useCallback(
     async (email: string, password: string) => {
       const loggedInUser = await authLogin(email, password);
+
       setUser(loggedInUser);
       setSessionExpired(false);
+
       scheduleExpiryRedirect();
+
       navigate("/", { replace: true });
     },
     [navigate, scheduleExpiryRedirect],
@@ -86,9 +89,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const logout = useCallback(() => {
     authLogout();
+
     if (expiryTimerRef.current) clearTimeout(expiryTimerRef.current);
+
     setUser(null);
     setSessionExpired(false);
+
     navigate("/login", { replace: true });
   }, [navigate]);
 

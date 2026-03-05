@@ -88,6 +88,8 @@ export async function login(
     body: { email, password },
   });
 
+  console.log("Login response:", { data, error });
+
   if (error || !data) {
     const errMsg =
       error != null && typeof error === "object" && "message" in error
@@ -97,9 +99,12 @@ export async function login(
   }
 
   // The login response shape from the shared DTO: { access_token, user: { id, name, email, role } }
-  const response = data as { access_token: string; user: AuthUser };
+  const response = data as { accessToken: string; user: AuthUser };
 
-  if (!response.access_token || !response.user) {
+  console.log("Parsed login response:", response);
+
+  if (!response.accessToken || !response.user) {
+    console.log("Login response missing accessToken or user:", response);
     throw new Error("Unexpected response from server");
   }
 
@@ -107,7 +112,7 @@ export async function login(
     throw new Error("Access denied: admin role required");
   }
 
-  setAuthToken(response.access_token);
+  setAuthToken(response.accessToken);
   saveUser(response.user);
 
   return response.user;
