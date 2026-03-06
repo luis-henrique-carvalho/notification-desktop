@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import api from "../api/client";
 import { io, Socket } from "socket.io-client";
 
@@ -72,10 +73,26 @@ export function DashboardPage() {
       console.log("WebSocket connected to gateway");
     });
 
-    socket.on("admin:history_update", (data) => {
-      console.log("Received admin:history_update event, data:", data);
-      fetchHistory(page);
-    });
+    // Task 5.3 — replaced admin:history_update with admin:notification_stats_updated
+    // Task 5.4 — patch in-place without re-fetching from server
+    socket.on(
+      "admin:notification_stats_updated",
+      (data: {
+        notificationId: string;
+        readCount: number;
+        unreadCount: number;
+        recipientCount: number;
+      }) => {
+        const { notificationId, readCount, unreadCount } = data;
+        setNotifications((prev) =>
+          prev.map((n) =>
+            n.notificationId === notificationId
+              ? { ...n, readCount, unreadCount }
+              : n,
+          ),
+        );
+      },
+    );
 
     socket.on("connect_error", (err) => {
       console.error("WebSocket connection error:", err.message);
@@ -170,6 +187,20 @@ export function DashboardPage() {
                   {notif.recipientCount} Reached (Read: {notif.readCount})
                 </div>
               </div>
+
+              {/* Task 5.5 — link to NotificationDetailPage */}
+              <Link
+                to={`/notifications/${notif.notificationId}`}
+                style={{
+                  display: "inline-block",
+                  marginTop: 4,
+                  fontSize: "0.85rem",
+                  color: "#60a5fa",
+                  textDecoration: "none",
+                }}
+              >
+                Ver detalhes →
+              </Link>
             </div>
           ))}
       </div>
