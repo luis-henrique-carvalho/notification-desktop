@@ -6,6 +6,7 @@ import { LoginPage } from "./pages/LoginPage";
 import { RegisterPage } from "./pages/RegisterPage";
 import { DashboardPage } from "./pages/DashboardPage";
 import { SendNotificationPage } from "./pages/SendNotificationPage";
+import { NotificationDetailPage } from "./pages/NotificationDetailPage";
 
 function App() {
   return (
@@ -27,6 +28,10 @@ function App() {
           >
             <Route index element={<DashboardPage />} />
             <Route path="send" element={<SendNotificationPage />} />
+            <Route
+              path="notifications/:id"
+              element={<NotificationDetailPage />}
+            />
           </Route>
 
           {/* Fallback */}
